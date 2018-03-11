@@ -1,0 +1,27 @@
+SpaceZombie
+Give me one of your men or I'll attack you!
+Fine, here's a man
+Guards!
+0,-10,0,0
+0,5,-5,0
+@@@
+Civilian
+Please send us more food, we're starving!
+Mashed potata's comin right up
+I'll have you ejected
+-10,10,0,0
+10,-10,0,0
+~~~
+Civilian
+civ2
+civ2yes
+civ2no
+-10,10,0,0
+10,-10,0,0
+~~~
+Civilian
+civ3
+civ3yes
+civ3no
+-10,10,0,0
+10,-10,0,0
