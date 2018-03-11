@@ -17,16 +17,17 @@ import javax.swing.UIManager;
 public class TBDZGame extends javax.swing.JFrame {
 
     private Point offset;
+    private Point cardOrigin = new Point(91, 292);
+    private boolean choiceDistanceReached;
 
     /**
      * Creates new form TBDZGame
      */
-
     public TBDZGame() {
         initComponents();
         getContentPane().setBackground(new Color(163, 159, 156));
-        jTextPane1.setBackground(new Color(255, 255, 255, 0));
-        CardHandler.createCard(jLabel1);
+        characterNamePane.setBackground(new Color(255, 255, 255, 0));
+        GameLogic.LoadDefaultDeck();
     }
 
     /**
@@ -38,6 +39,13 @@ public class TBDZGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        cardPanel = new javax.swing.JPanel();
+        cardLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        characterNamePane = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         screenTop = new javax.swing.JPanel();
         iconIndicatorBar = new javax.swing.JPanel();
         foodIconIndicator = new javax.swing.JLabel();
@@ -49,7 +57,7 @@ public class TBDZGame extends javax.swing.JFrame {
         foodIconPanel = new javax.swing.JPanel();
         foodIcon = new javax.swing.JLabel();
         foodBar = new javax.swing.JProgressBar();
-        jPanel3 = new javax.swing.JPanel();
+        peopleResource = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -62,12 +70,6 @@ public class TBDZGame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jProgressBar4 = new javax.swing.JProgressBar();
         screenBottom = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jPanel5 = new javax.swing.JPanel();
-        cardLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(153, 0, 51));
@@ -80,6 +82,61 @@ public class TBDZGame extends javax.swing.JFrame {
                 ShowLaucher(evt);
             }
         });
+
+        cardPanel.setPreferredSize(new java.awt.Dimension(250, 250));
+        cardPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cardPanelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cardPanelMouseReleased(evt);
+            }
+        });
+        cardPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cardPanelMouseDragged(evt);
+            }
+        });
+
+        cardLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rogier\\OneDrive\\Documents\\Andere stuff\\CodingFun\\TBDZombie\\HDFootballZombie2.png")); // NOI18N
+        cardLabel.setText("picture");
+        cardLabel.setPreferredSize(new java.awt.Dimension(253, 253));
+
+        javax.swing.GroupLayout cardPanelLayout = new javax.swing.GroupLayout(cardPanel);
+        cardPanel.setLayout(cardPanelLayout);
+        cardPanelLayout.setHorizontalGroup(
+            cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        cardPanelLayout.setVerticalGroup(
+            cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        characterNamePane.setEditable(false);
+        characterNamePane.setBorder(null);
+        characterNamePane.setContentType("text/html"); // NOI18N
+        characterNamePane.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        characterNamePane.setText("<HTML><BODY><CENTER>Dat boi Trump</CENTER></BODY></HTML>");
+        characterNamePane.setDisabledTextColor(new java.awt.Color(255, 0, 153));
+        jScrollPane1.setViewportView(characterNamePane);
+
+        jScrollPane3.setBackground(new java.awt.Color(163, 159, 156));
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea2.setEditable(false);
+        jTextArea2.setBackground(new java.awt.Color(163, 159, 156));
+        jTextArea2.setColumns(20);
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("Datplaceholder text oe wow will it fit i bet not java is mean like dat yknow 292");
+        jScrollPane3.setViewportView(jTextArea2);
 
         screenTop.setBackground(new java.awt.Color(0, 0, 0));
         screenTop.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
@@ -189,8 +246,8 @@ public class TBDZGame extends javax.swing.JFrame {
 
         ResourceBar.add(foodResource);
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(100, 100));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        peopleResource.setPreferredSize(new java.awt.Dimension(100, 100));
+        peopleResource.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
         jPanel4.setAlignmentX(0.0F);
@@ -215,11 +272,11 @@ public class TBDZGame extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 100));
+        peopleResource.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 100));
 
         jProgressBar1.setBackground(new java.awt.Color(102, 102, 102));
         jProgressBar1.setOrientation(1);
@@ -227,9 +284,9 @@ public class TBDZGame extends javax.swing.JFrame {
         jProgressBar1.setMaximumSize(new java.awt.Dimension(100, 120));
         jProgressBar1.setMinimumSize(new java.awt.Dimension(100, 120));
         jProgressBar1.setPreferredSize(new java.awt.Dimension(100, 100));
-        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        peopleResource.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        ResourceBar.add(jPanel3);
+        ResourceBar.add(peopleResource);
 
         jPanel7.setMinimumSize(new java.awt.Dimension(100, 100));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -327,93 +384,55 @@ public class TBDZGame extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jScrollPane3.setBackground(new java.awt.Color(163, 159, 156));
-        jScrollPane3.setBorder(null);
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextArea2.setEditable(false);
-        jTextArea2.setBackground(new java.awt.Color(163, 159, 156));
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Datplaceholder text oe wow will it fit i bet not java is mean like dat yknow");
-        jScrollPane3.setViewportView(jTextArea2);
-
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextPane1.setEditable(false);
-        jTextPane1.setBorder(null);
-        jTextPane1.setContentType("text/html"); // NOI18N
-        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextPane1.setText("<HTML><BODY><CENTER>Dat boi Trump</CENTER></BODY></HTML>");
-        jTextPane1.setDisabledTextColor(new java.awt.Color(255, 0, 153));
-        jScrollPane1.setViewportView(jTextPane1);
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(250, 250));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel5MousePressed(evt);
-            }
-        });
-        jPanel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jPanel5MouseDragged(evt);
-            }
-        });
-
-        cardLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rogier\\OneDrive\\Documents\\Andere stuff\\CodingFun\\TBDZombie\\HDFootballZombie2.png")); // NOI18N
-        cardLabel.setText("picture");
-        cardLabel.setPreferredSize(new java.awt.Dimension(253, 253));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(screenTop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 435, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+            .addComponent(screenBottom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                    .addContainerGap(91, Short.MAX_VALUE)
+                    .addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(91, Short.MAX_VALUE)))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addComponent(screenTop, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(screenBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                    .addContainerGap(293, Short.MAX_VALUE)
+                    .addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(164, Short.MAX_VALUE)))
         );
+        jLayeredPane1.setLayer(cardPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(screenTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(screenBottom, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(screenTop, javax.swing.GroupLayout.PREFERRED_SIZE, 415, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addComponent(screenBottom, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane3)
-                    .addContainerGap()))
+            .addComponent(jLayeredPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(screenTop, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(screenBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(146, 146, 146)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(470, Short.MAX_VALUE)))
+            .addComponent(jLayeredPane1)
         );
 
         pack();
@@ -427,8 +446,7 @@ public class TBDZGame extends javax.swing.JFrame {
         TBDZLauncher.getFrames()[0].setVisible(true);
     }//GEN-LAST:event_ShowLaucher
 
-    private void jPanel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
-        System.out.println("dragged");
+    private void cardPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanelMouseDragged
         int x = evt.getPoint().x - offset.x;
         int y = evt.getPoint().y - offset.y;
         Component component = evt.getComponent();
@@ -436,12 +454,27 @@ public class TBDZGame extends javax.swing.JFrame {
         location.x += x;
         location.y += y;
         component.setLocation(location);
-    }//GEN-LAST:event_jPanel5MouseDragged
+        if (location.x > offset.x + 130 || location.x < offset.x - 130) {
+            System.out.println("boundary");
+            choiceDistanceReached = true;
+        } else {
+            choiceDistanceReached = false;
+        }
+        System.out.println(choiceDistanceReached);
+    }//GEN-LAST:event_cardPanelMouseDragged
 
-    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+    private void cardPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanelMousePressed
         offset = evt.getPoint();
         System.out.println("pressed");
-    }//GEN-LAST:event_jPanel5MousePressed
+    }//GEN-LAST:event_cardPanelMousePressed
+
+    private void cardPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanelMouseReleased
+        if (choiceDistanceReached) {
+            System.out.println("CHOICEMADE");
+        }
+        Component component = evt.getComponent();
+        component.setLocation(cardOrigin.x, cardOrigin.y);
+    }//GEN-LAST:event_cardPanelMouseReleased
 
     public static void main() {
         /* Set the Nimbus look and feel */
@@ -465,12 +498,10 @@ public class TBDZGame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TBDZGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        System.out.println("kek");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("sad");
                 new TBDZGame().setVisible(true);
             }
         });
@@ -480,6 +511,8 @@ public class TBDZGame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane ResourceBar;
     public static javax.swing.JLabel cardLabel;
+    private javax.swing.JPanel cardPanel;
+    public static javax.swing.JTextPane characterNamePane;
     private javax.swing.JProgressBar foodBar;
     private javax.swing.JLabel foodIcon;
     private javax.swing.JLabel foodIconIndicator;
@@ -491,10 +524,9 @@ public class TBDZGame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -504,8 +536,8 @@ public class TBDZGame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel peopleIconIndicator;
+    private javax.swing.JPanel peopleResource;
     private javax.swing.JPanel screenBottom;
     private javax.swing.JPanel screenTop;
     // End of variables declaration//GEN-END:variables
