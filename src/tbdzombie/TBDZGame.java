@@ -98,7 +98,7 @@ public class TBDZGame extends javax.swing.JFrame {
             }
         });
 
-        cardLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rogier\\OneDrive\\Documents\\Andere stuff\\CodingFun\\TBDZombie\\HDFootballZombie2.png")); // NOI18N
+        cardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Characters/SpaceZombie.png"))); // NOI18N
         cardLabel.setText("picture");
         cardLabel.setPreferredSize(new java.awt.Dimension(253, 253));
 
@@ -384,6 +384,12 @@ public class TBDZGame extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jLayeredPane1.setLayer(cardPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(screenTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(screenBottom, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
@@ -418,11 +424,6 @@ public class TBDZGame extends javax.swing.JFrame {
                     .addComponent(cardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(164, Short.MAX_VALUE)))
         );
-        jLayeredPane1.setLayer(cardPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(screenTop, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(screenBottom, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

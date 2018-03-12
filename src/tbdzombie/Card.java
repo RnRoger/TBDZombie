@@ -23,21 +23,40 @@ public class Card {
     private int[] rightResources;
     private int[] leftResources;
 
-    Card(String imageName, String cardStory, String rightOption, String leftOption, String[] rightResources, String[] leftResources) {
-        TBDZGame.characterNamePane.setText(imageName);
+    //String imageName, String cardStory, String rightOption, String leftOption, String[] rightResources, String[] leftResources
+    Card(String cardRaw) {
+        String[] cardRawArray = cardRaw.trim().split("\n");
+        TBDZGame.characterNamePane.setText(cardRawArray[0]);
         Image img = null;
         try {
-            File pathToFile = new File(String.format(getClass().getResource("/Characters/%s.png").toString(),imageName));
+            System.out.println("asdasdas"+cardRaw.replaceAll("\n", "koekenpan"));
+            File pathToFile;
+            pathToFile = new File(String.format(getClass().getResource("/Characters/%s.png").toString(),cardRawArray[0]));
+            System.out.println("PATH:");
+            System.out.println("PATH2 "+pathToFile);
             img = ImageIO.read(pathToFile);
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException ex){
+            System.out.println("rekt");
         }
         this.charachter = img;
-        this.cardStory = cardStory;
-        this.rightOption = rightOption;
-        this.leftOption = leftOption;
+        this.cardStory = cardRawArray[1];
+        this.rightOption = cardRawArray[2];
+        this.leftOption = cardRawArray[3];
         
-        this.rightResources = rightResources;
-        this.leftResources = leftResources;
+        String[] rightResourcesString = cardRawArray[4].split(",");
+        int[] rightResourcesInt = new int[rightResourcesString.length];
+        for (int i = 0; i < rightResourcesString.length; i++){
+            rightResourcesInt[i] = Integer.parseInt(rightResourcesString[i]);
+        }
+        this.rightResources = rightResourcesInt;
+        
+        String[] leftResourcesString = cardRawArray[4].split(",");
+        int[] leftResourcesInt = new int[leftResourcesString.length];
+        for (int i = 0; i < leftResourcesString.length; i++){
+            leftResourcesInt[i] = Integer.parseInt(leftResourcesString[i]);
+        }
+        this.leftResources = leftResourcesInt;
     }
 }
