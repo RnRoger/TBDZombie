@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -18,7 +19,11 @@ import java.util.ArrayList;
 public class GameLogic {
 
     public static ArrayList<ArrayList<Card>> playDeck = new ArrayList<>();
-
+    static ArrayList<Card> currentEvent;
+    static Card currentCard;
+    static Random rand;
+    
+    
     public static void LoadDefaultDeck() {
         playDeck.addAll(readDeck("defaultDeck"));
         System.out.println("PLAYDECK:\n"+playDeck);
@@ -58,5 +63,16 @@ public class GameLogic {
         }
         return newDeck;
     }
-
+    
+    public static void ReadEvent(){
+        rand = new Random();
+        System.out.println(">"+rand.nextInt());
+        currentEvent = playDeck.get(rand.nextInt(playDeck.size()));
+    }
+    
+    public static void ReadCard(int cardNr){
+        currentCard = currentEvent.get(cardNr);
+        TBDZGame.putCard(currentCard);
+        System.out.println("card read: "+ currentCard.getCharachterName());
+    }
 }

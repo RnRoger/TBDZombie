@@ -8,6 +8,7 @@ package tbdzombie;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 /**
@@ -27,7 +28,8 @@ public class TBDZGame extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new Color(163, 159, 156));
         characterNamePane.setBackground(new Color(255, 255, 255, 0));
-        GameLogic.LoadDefaultDeck();
+        GameFlow.main();
+ 
     }
 
     /**
@@ -45,7 +47,7 @@ public class TBDZGame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         characterNamePane = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        storyPanel = new javax.swing.JTextArea();
         screenTop = new javax.swing.JPanel();
         iconIndicatorBar = new javax.swing.JPanel();
         foodIconIndicator = new javax.swing.JLabel();
@@ -130,13 +132,12 @@ public class TBDZGame extends javax.swing.JFrame {
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setBackground(new java.awt.Color(163, 159, 156));
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Datplaceholder text oe wow will it fit i bet not java is mean like dat yknow 292");
-        jScrollPane3.setViewportView(jTextArea2);
+        storyPanel.setEditable(false);
+        storyPanel.setBackground(new java.awt.Color(163, 159, 156));
+        storyPanel.setColumns(20);
+        storyPanel.setLineWrap(true);
+        storyPanel.setRows(5);
+        jScrollPane3.setViewportView(storyPanel);
 
         screenTop.setBackground(new java.awt.Color(0, 0, 0));
         screenTop.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
@@ -456,12 +457,10 @@ public class TBDZGame extends javax.swing.JFrame {
         location.y += y;
         component.setLocation(location);
         if (location.x > offset.x + 130 || location.x < offset.x - 130) {
-            System.out.println("boundary");
             choiceDistanceReached = true;
         } else {
             choiceDistanceReached = false;
         }
-        System.out.println(choiceDistanceReached);
     }//GEN-LAST:event_cardPanelMouseDragged
 
     private void cardPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanelMousePressed
@@ -472,9 +471,11 @@ public class TBDZGame extends javax.swing.JFrame {
     private void cardPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanelMouseReleased
         if (choiceDistanceReached) {
             System.out.println("CHOICEMADE");
+            GameFlow.main3();
         }
         Component component = evt.getComponent();
         component.setLocation(cardOrigin.x, cardOrigin.y);
+        
     }//GEN-LAST:event_cardPanelMouseReleased
 
     public static void main() {
@@ -507,6 +508,14 @@ public class TBDZGame extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static void putCard(Card card){
+        ImageIcon icon = card.getCharacter();
+        System.out.println("ICOM: "+icon.toString());
+        cardLabel.setIcon(icon);
+        characterNamePane.setText(card.getCharachterName());
+        storyPanel.setText(card.getCardStory());
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -536,10 +545,10 @@ public class TBDZGame extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel peopleIconIndicator;
     private javax.swing.JPanel peopleResource;
     private javax.swing.JPanel screenBottom;
     private javax.swing.JPanel screenTop;
+    private static javax.swing.JTextArea storyPanel;
     // End of variables declaration//GEN-END:variables
 }
